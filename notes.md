@@ -1,5 +1,6 @@
 To-do from notes:
 - [ ] Remove duplicates (August 18, 2015; remark 2)
+- [ ] Remove retweets (August 18, 2015; remark 3); i.e., remove when a tweet is part of another tweet, but not a direct duplicate
 - [ ] Check all tweets with link that link *is* actually a request (August 18, 2015; remark 3)
 - [ ] Check all tweets without a link whether it does include a request (August 18, 2015; remark 3)
 
@@ -8,4 +9,4 @@ To-do from notes:
 2. I already note that retweets are also incorporated and cause duplicates. Needs to be taken into account when finished project.
 3. Also, not all tweets contain links. BUT not all requests include a link or tweets with #icanhazpdf are requests. Need to manually check these (that's going to be much manual labor...)
 4. Adjusted the IFTTT recipe a bit, forgot to separate final two columns
-5. 
+5. To add to remark 2: note that tweets are retweeted and duplicate is therefore also when a tweet occurs as part of another tweet.
