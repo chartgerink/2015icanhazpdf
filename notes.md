@@ -1,6 +1,6 @@
 To-do from notes:
-- [ ] Remove duplicates (August 18, 2015; remark 2)
-- [ ] Remove retweets (August 18, 2015; remark 3); i.e., remove when a tweet is part of another tweet, but not a direct duplicate
+- [x] Remove duplicates (August 18, 2015; remark 2)
+- [x] Remove retweets (August 18, 2015; remark 3); i.e., remove when a tweet is part of another tweet, but not a direct duplicate
 - [ ] Check all tweets with link that link *is* actually a request (August 18, 2015; remark 3)
 - [ ] Check all tweets without a link whether it does include a request (August 18, 2015; remark 3)
 - [x] Remove all missing `firsturl` (August 19, 2015; remark 1)

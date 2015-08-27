@@ -15,4 +15,9 @@ dat <- gs_url(link) %>% gs_read_csv()
 missing.firsturl <- grep("ifttt.com/missing_link", dat$firsturl)
 dat$firsturl[missing.firsturl] <- NA
 
+# Remove duplicates
+dat <- dat[!duplicated(dat$twt), ]
+# Remove retweets
+dat <- dat[grepl(pattern = "RT @.*: .*", dat$twt), ]
+
 write.table(dat, 'data/data.csv', sep = ';', dec = '.', row.names = FALSE)
