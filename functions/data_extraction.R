@@ -9,15 +9,20 @@ library(googlesheets)
 
 
 link = "https://docs.google.com/spreadsheets/d/1OXMHv6lal_GiMneW4xHa2wvG4BzTyD41zcCnmfF6PUY/edit?usp=sharing"
-dat <- gs_url(link) %>% gs_read_csv()
+dat <- gs_url(link) %>% gs_read_csv(ws = "raw")
 
 # Remove all missing `firsturl` (August 19, 2015; remark 1)
 missing.firsturl <- grep("ifttt.com/missing_link", dat$firsturl)
 dat$firsturl[missing.firsturl] <- NA
 
-# Remove duplicates
+# Remove duplicates (August 18, 2015; remark 2)
 dat <- dat[!duplicated(dat$twt), ]
-# Remove retweets
-dat <- dat[grepl(pattern = "RT @.*: .*", dat$twt), ]
+# Remove retweets (August 18, 2015; remark 3)
+dat <- dat[!grepl(pattern = "RT @.*: .*", dat$twt), ]
 
-write.table(dat, 'data/data.csv', sep = ';', dec = '.', row.names = FALSE)
+# Remove all tweets that are no request (August 18, 2015; remark 3)
+dat <- dat[dat$request == 1, ]
+# Remove the $request
+dat <- dat[, -dim(dat)[2]]
+
+write.table(dat, 'data/coding.csv', row.names = FALSE, sep = ',', dec = '.')
