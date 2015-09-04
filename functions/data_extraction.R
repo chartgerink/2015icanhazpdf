@@ -7,8 +7,7 @@ library(magrittr)
 library(curl)
 library(googlesheets)
 
-
-link = "https://docs.google.com/spreadsheets/d/1OXMHv6lal_GiMneW4xHa2wvG4BzTyD41zcCnmfF6PUY/edit?usp=sharing"
+link = "https://docs.google.com/spreadsheets/d/1OXMHv6lal_GiMneW4xHa2wvG4BzTyD41zcCnmfF6PUY/pub?output=csv"
 dat <- gs_url(link) %>% gs_read_csv(ws = "raw")
 
 # Remove all missing `firsturl` (August 19, 2015; remark 1)
@@ -26,3 +25,4 @@ dat <- dat[dat$request == 1, ]
 dat <- dat[, -dim(dat)[2]]
 
 write.table(dat, 'data/coding.csv', row.names = FALSE, sep = ',', dec = '.')
+# gs_url(link) %>% gs_edit_cells(dat, ws = "coding", anchor = "A1")
