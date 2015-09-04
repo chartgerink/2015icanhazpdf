@@ -14,3 +14,6 @@ To-do from notes:
 
 # August 19, 2015
 1. Need to remove `firsturl` from tweets that have no url at all. These contain `ifttt.com/missing_link`.
+
+# September 2, 2015
+1. The first #icanhazpdf tweet available [here](https://twitter.com/AndreaKuszewski/status/28257118322688000), from January 21, 2011.
