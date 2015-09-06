@@ -7,6 +7,8 @@ library(magrittr)
 library(curl)
 library(googlesheets)
 
+source('functions/month_numeric.R')
+
 link = "https://docs.google.com/spreadsheets/d/1OXMHv6lal_GiMneW4xHa2wvG4BzTyD41zcCnmfF6PUY/pub?output=csv"
 dat <- gs_url(link) %>% gs_read_csv(ws = "raw")
 
@@ -23,6 +25,21 @@ dat <- dat[!grepl(pattern = "RT @.*: .*", dat$twt), ]
 dat <- dat[dat$request == 1, ]
 # Remove the $request
 dat <- dat[, -dim(dat)[2]]
+
+# Reshape time var to ISO format
+dat$time = NULL
+for(i in 1:length(dat$time)){
+  y = substr(dat$time[i],
+             start = gregexpr(' ', dat$time[i])[[1]][2] + 1,
+             gregexpr(' ', dat$time[i])[[1]][3] - 1)
+  m = substr(dat$time[i],
+             start = 0,
+             gregexpr(' ', dat$time[i])[[1]][1] - 1)
+  d = substr(dat$time[i],
+             start = gregexpr(' ', dat$time[i])[[1]][1] + 1,
+             gregexpr(',', dat$time[i])[[1]][1] - 1)
+  dat$time[i] = paste0(y, month_numeric(m), d)
+}
 
 write.table(dat, 'data/coding.csv', row.names = FALSE, sep = ',', dec = '.')
 # gs_url(link) %>% gs_edit_cells(dat, ws = "coding", anchor = "A1")

@@ -4,6 +4,7 @@ To-do from notes:
 - [x] Check all tweets with link that link *is* actually a request (August 18, 2015; remark 3)
 - [x] Check all tweets without a link whether it does include a request (August 18, 2015; remark 3)
 - [x] Remove all missing `firsturl` (August 19, 2015; remark 1)
+- [x] Reshape `time` variable to ISO format YYYYMMDD
 
 # August 18, 2015
 1. Got idea to do this project. Will be logging `#icanhazpdf` tweets with [If This Then That](ifttt.com) recipe. This was activated at 12.43PM. The idea is to log the requests, then check whether they are available via e.g. [Sci-hub](sci-hub.org). Additionally, it could be checked whether they adhere to the #icanhazpdf etiquette, but this is optional.
