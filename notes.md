@@ -18,3 +18,6 @@ To-do from notes:
 
 # September 2, 2015
 1. The first #icanhazpdf tweet available [here](https://twitter.com/AndreaKuszewski/status/28257118322688000), from January 21, 2011.
+
+# September 14, 2015
+1. Some of the logged tweets noted that `#canihazpdf` is used concurrently with `#icanhazpdf`. I searched for tweets using `#canihazpdf` and there are only few tweets dispersed over reasonable amounts of time. I will keep the focus on `#icanhazpdf`.
