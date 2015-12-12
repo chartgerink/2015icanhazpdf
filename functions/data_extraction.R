@@ -1,17 +1,13 @@
 if(!require(devtools)){install.packages('devtools')}
 if(!require(magrittr)){install.packages('magrittr')}
 if(!require(curl)){install.packages('curl')}
-if(!require(googlesheets)){install_github('jennybc/googlesheets')}
 library(devtools)
 library(magrittr)
 library(curl)
-library(googlesheets)
-
 
 source('functions/month_numeric.R')
 
-link = "https://docs.google.com/spreadsheets/d/1OXMHv6lal_GiMneW4xHa2wvG4BzTyD41zcCnmfF6PUY/pub?output=csv"
-dat <- gs_url(link) %>% gs_read_csv(ws = "raw")
+dat <- read.csv('data/raw_2015-12-12.csv', header = FALSE)
 
 # Remove all missing `firsturl` (August 19, 2015; remark 1)
 missing.firsturl <- grep("ifttt.com/missing_link", dat$firsturl)
