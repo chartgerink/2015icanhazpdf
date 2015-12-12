@@ -23,7 +23,7 @@ dat$firsturl[missing.firsturl] <- NA
 # Remove duplicates (August 18, 2015; remark 2)
 dat <- dat[!duplicated(dat$twt), ]
 # Remove retweets (August 18, 2015; remark 3)
-dat <- dat[!grepl(pattern = "RT @.*: .*", dat$twt), ]
+dat <- dat[!grepl(pattern = "^rt", dat$twt, ignore.case = TRUE), ]
 
 dat$request <- NA
 
