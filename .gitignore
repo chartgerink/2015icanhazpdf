@@ -2,4 +2,9 @@
 */.Rhistory
 .httr-oath
 .Rhistory
+<<<<<<< HEAD
 /Literature/*
+=======
+data/raw_*
+.Rproj.user
+>>>>>>> 1004fd3d8ea189dd462ee4e3cb3e3c81078be4e0
