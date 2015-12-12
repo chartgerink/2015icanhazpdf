@@ -21,3 +21,12 @@ To-do from notes:
 
 # September 14, 2015
 1. Some of the logged tweets noted that `#canihazpdf` is used concurrently with `#icanhazpdf`. I searched for tweets using `#canihazpdf` and there are only few tweets dispersed over reasonable amounts of time. I will keep the focus on `#icanhazpdf`.
+
+# December 12, 2015
+1. Downloaded the Google sheets files in xlsx, converted them to csv and joined them with `cat data/raw*/*.csv > data/raw_2015-12-12.csv`. These are not pushed to git for privacy of the original requesters.
+2. Some things for coding.
+
+  1. Request split over multiple tweets? Code one of the N tweets, the one with the link, or the majority of the title requested.
+  2. Link + email = request
+
+3.
