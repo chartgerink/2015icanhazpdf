@@ -7,7 +7,14 @@ library(curl)
 
 source('functions/month_numeric.R')
 
-dat <- read.csv('data/raw_2015-12-12.csv', header = FALSE)
+date <- '2015-12-12'
+
+dat <- read.csv(sprintf('data/raw_%s.csv', date), header = FALSE)
+
+names(dat) <- c('firsturl',
+                'link',
+                'date',
+                'twt')
 
 # Remove all missing `firsturl` (August 19, 2015; remark 1)
 missing.firsturl <- grep("ifttt.com/missing_link", dat$firsturl)
@@ -18,6 +25,11 @@ dat <- dat[!duplicated(dat$twt), ]
 # Remove retweets (August 18, 2015; remark 3)
 dat <- dat[!grepl(pattern = "RT @.*: .*", dat$twt), ]
 
+dat$request <- NA
+
+write.csv(dat, sprintf('data/raw_%s_partial.csv', date), row.names = FALSE)
+
+dat <- read.csv(sprintf('data/raw_%s_partial.csv', date))
 # Remove all tweets that are no request (August 18, 2015; remark 3)
 dat <- dat[dat$request == 1, ]
 # Remove the $request
