@@ -1,0 +1,80 @@
+---
+title: "#icanhazpdf blog"
+author: "JM van Zelst, Chris HJ Hartgerink"
+date: "`r format(Sys.time(), '%d %B, %Y')`" 
+output: html_document
+---
+
+```{r, dependencies, echo = FALSE}
+if(!require(devtools)){install.packages('devtools')}
+if(!require(magrittr)){install.packages('magrittr')}
+if(!require(curl)){install.packages('curl')}
+if(!require(plyr)){install.packages('plyr')}
+if(!require(ggplot2)){install.packages('ggplot2')}
+
+suppressPackageStartupMessages(library(devtools))
+suppressPackageStartupMessages(library(magrittr))
+suppressPackageStartupMessages(library(curl))
+suppressPackageStartupMessages(library(plyr))
+suppressPackageStartupMessages(library(ggplot2))
+
+source('functions/month_numeric.R')
+
+dat <- read.csv('data/2015-12-12_coded_anonymized.csv')
+dat_dirty <- read.csv('data/raw_2015-12-12.csv', header = FALSE)
+dat$date <- as.character(dat$date)
+
+p_o <- (dim(dat)[1] - sum(abs(dat$chjh - dat$mzelst))) / dim(dat)[1]
+p_e <- .5
+
+kappa <- (p_o - p_e) / (1 - p_e)
+
+dat$final <- ifelse(dat$chjh != dat$mzelst, 0, dat$chjh)
+
+
+# Reshape time var to ISO format
+for(i in 1:length(dat$date)){
+  y = substr(dat$date[i],
+             start = gregexpr(' ', dat$date[i])[[1]][2] + 1,
+             gregexpr(' ', dat$date[i])[[1]][3] - 1)
+  m = month_numeric(substr(dat$date[i],
+             start = 0,
+             gregexpr(' ', dat$date[i])[[1]][1] - 1))
+  d = substr(dat$date[i],
+             start = gregexpr(' ', dat$date[i])[[1]][1] + 1,
+             gregexpr(',', dat$date[i])[[1]][1] - 1)
+  dat$date[i] = paste0(y, m, d)
+}
+
+
+temp <- ddply(dat, .(date), function (x) {
+  requests <- sum(x$final)
+  return(requests)
+})
+
+temp$date <- as.Date(temp$date, '%Y%m%d')
+names(temp) <- c('Date', 'Requests')
+```
+
+retweets = `r sum(grepl(pattern = "^rt", dat_dirty$V4, ignore.case = TRUE))`
+total_dirty = `r sum(grepl(pattern = "^rt", dat_dirty$V4, ignore.case = TRUE))`
+
+open access week --> 19 25 oct 2015
+
+
+
+
+```{r, echo = FALSE}
+ggplot(data = temp, aes(x = Date, y = Requests)) + 
+  geom_point() +
+  geom_smooth(method = 'loess') + 
+  geom_line(aes(x = as.Date("2015-10-21")))
+```
+
+
+```{r, echo = FALSE}
+ggplot(data = temp, aes(x = Date, y = Requests)) + 
+  geom_point() +
+  geom_smooth(method = 'lm') + 
+  geom_line(aes(x = as.Date("2015-10-21")))
+```
