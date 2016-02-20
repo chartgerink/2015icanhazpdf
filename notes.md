@@ -29,4 +29,9 @@ To-do from notes:
   1. Request split over multiple tweets? Code one of the N tweets, the one with the link, or the majority of the title requested.
   2. Link + email = request
 
-3.
+3. Had to redownload because I forgot to concatenate the august-september requests from a different sheet, sent it to marino.
+
+# February 20, 2016
+1. mzelst and chjh both coded.
+2. chjh missed a few... Coded them accordingly (not independent anymore though, 3 tweets)
+3. 
